@@ -10,3 +10,19 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- 생성일
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP  -- 수정일
 );
+
+CREATE TABLE ingredients (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+
+    name VARCHAR(100) NOT NULL,
+    quantity NUMERIC(10, 2) NOT NULL DEFAULT 0,
+    unit VARCHAR(20) NOT NULL, -- g, ml, 개 등
+
+    category VARCHAR(50), -- 채소, 육류, 유제품 등
+    location VARCHAR(20) NOT NULL CHECK (location IN ('fridge', 'freezer', 'room')),
+
+    expiration_date DATE,
+    
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
